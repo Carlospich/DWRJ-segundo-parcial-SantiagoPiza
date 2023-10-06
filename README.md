@@ -1,9 +1,9 @@
 # Parcial Segundo Corte Desarrollo Web 🚀
 
 
-Nombre completo estudiante :
+Nombre completo estudiante : Carlos Santiago Piza Choachi
 
-Codigo :
+Codigo : 0000227586
 
 **Descripción del Problema:**
 

@@ -11,8 +11,8 @@ export const FetchMealById = async (id) => {
     return data.meals[0]
 }
 
-export const FetchMealByFirstLetter = async (letter = 'b') => {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`)
-    const data = await response.json()
-    return data.meals
-}
+    export const FetchMealByFirstLetter = async (letter = 'b') => {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`)
+        const data = await response.json()
+        return data.meals
+    }
