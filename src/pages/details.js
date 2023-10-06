@@ -1,62 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
-import Navbar from '../components/navbar';
-import {FetchMealById} from '../services/mealtService';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { FetchMealById } from "../services/mealtService"; 
 
 function Detail() {
   const { id } = useParams();
   const [meal, setMeal] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    FetchMealById(id)
-      .then((data) => {
-        if (data) {
-          setMeal(data);
-        } else {
-          setError('No se encontraron detalles de la comida.');
-        }
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
+    
+    async function fetchMealDetails() {
+      try {
+        const mealDetails = await FetchMealById(id); 
+        setMeal(mealDetails); 
+      } catch (error) {
+        console.error("Error al obtener detalles del producto: ", error);
+      }
+    }
+
+    fetchMealDetails(); 
   }, [id]);
 
-  if (!meal) {
-    return <div>Cargando...</div>;
-  }
-
   return (
-    <div className='container'>
-      <div className='navigationbar-container'>
-        <Navbar />
-      </div>
-      <div className='all-container'>
-        {error ? (
-          <div className='error-message'>{error}</div>
-        ) : (
-          <div className='detail-container'>
-            <div key={meal.idMeal} className='card-detail'>
-              <div className='image-detail'>
-                <div className='product-image-detail'>
-                  {meal.strMealThumb ? (
-                    <img src={meal.strMealThumb} alt={meal.strMeal} />
-                  ) : (
-                    <p>No hay imagen disponible</p>
-                  )}
-                </div>
-              </div>
-              <div className='detail'>
-                <h2>{meal.strMeal}</h2>
-                <p>Categoría: {meal.strCategory}</p>
-                <p>Área: {meal.strArea}</p>
-                <p>Ingredientes: {meal.strIngredient1}, {meal.strIngredient2}, ...</p>
-                <p>Instrucciones: {meal.strInstructions}</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+    <div>
+      <h1>Detalles del producto</h1>
+      {meal ? (
+        <div>
+          <img src={meal.imageUrl} alt={meal.name} />
+          <h2>{meal.name}</h2>
+        </div>
+      ) : (
+        <p>Cargando detalles del producto...</p>
+      )}
     </div>
   );
 }
