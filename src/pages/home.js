@@ -7,13 +7,11 @@ function Home({ meals_list }) {
     <div className='page'>
       <MealPreviwGrid meals_list={meals_list} />
       <div className="meal-list">
-        {meals_list.map((meal) => (
-          <div key={meal.id}>
-            <Link to={`/item/${meal.id}`}>
-              <img src={meal.imageUrl} alt={meal.name} />
-            </Link>
-          </div>
-        ))}
+	  {meals_list.map((meal) => (
+		<Link to={`/item/${meal.id}`} key={meal.id}>
+		  <img src={meal.image_url} alt={meal.name} />
+		</Link>
+	  ))}
       </div>
     </div>
   );

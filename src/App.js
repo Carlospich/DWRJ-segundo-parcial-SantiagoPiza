@@ -6,7 +6,6 @@ import Home from "./pages/home";
 import { FetchMealByFirstLetter } from "./services/mealtService";
 import { Route, Routes } from "react-router-dom";
 import { SearchMealByName } from "./services/mealtService";
-
 import Detail from "./pages/details";
 
 function App() {
@@ -46,7 +45,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Navbar>
+      <Navbar setSearchResults={setSearchResults}>
         <SearchBox onSearch={handleSearch} />
       </Navbar>
       <Routes>
